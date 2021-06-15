@@ -5,7 +5,7 @@ const { throwError } = require('../../utils/handleErrors');
 const { hashManager } = require('../../utils/bcrypt');
 const { jwtManager } = require('../../utils/tokenizer');
 const sendMail = require('../../utils/email');
-const { activateAccount } = require('../../utils/messages');
+const { activateAccount, activatePatient } = require('../../utils/messages');
 const { uploadFile } = require('../../utils/uploader');
 const Patient = require('../models/patient');
 
@@ -143,7 +143,7 @@ exports.resendToken = async (req, res) => {
     if (!updatedPatient) {
       throwError('Account has been activated', 401);
     }
-    const activationLink = activateAccount(token, patientId);
+    const activationLink = activatePatient(token, patientId);
     await sendMail(updatedPatient.email, 'account activation', activationLink);
 
     return sendSuccess(res, 'Token Sent');
