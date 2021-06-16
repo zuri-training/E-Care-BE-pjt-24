@@ -1,0 +1,48 @@
+{
+  "name": "e-care-be-pjt-24",
+  "version": "1.0.0",
+  "description": "About E-Care E-care is centered towards achieving SDGs goal number three (good health and well being). This would be achieved through the two key features of the app namely; Health record management  which provide solution to hospital record mismanagement which has in turn led to loss of several lives and rural-connect    focuses on extending good health care to rural dwellers by connecting the rural community health care providers with their senior counterparts at urban health centers closest to them, so as to receive guidance in handling emergencies and other critical conditions.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index",
+    "lint": "eslint . --ext .js --fix"
+  },
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zuri-training/E-Care-BE-pjt-24.git"
+  },
+  "author": "Ajiboye Adedotun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zuri-training/E-Care-BE-pjt-24/issues"
+  },
+  "homepage": "https://github.com/zuri-training/E-Care-BE-pjt-24#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cloudinary": "^1.26.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mailgun-js": "^0.22.0",
+    "mongoose": "^5.12.5",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.6.1",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.26.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.23.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-promise": "^4.3.1",
+    "nodemon": "^2.0.7"
+  }
+}
