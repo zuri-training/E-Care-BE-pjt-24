@@ -11,4 +11,5 @@ module.exports = {
   MAILGUN_APIKEY: process.env.MAILGUN_APIKEY,
   MAILGUN_DOMAIN: process.env.MAILGUN_DOMAIN,
   EMAIL_ADDRESS: process.env.EMAIL_ADDRESS,
+  SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
 };

@@ -1,18 +1,27 @@
-const mailgun = require('mailgun-js');
-const { MAILGUN_APIKEY, MAILGUN_DOMAIN, EMAIL_ADDRESS } = require('../src/core/config');
+const sendGridMail = require('@sendgrid/mail');
+const { logger } = require('./logger');
 
-const sendMail = async (email, subject, message, cb) => {
-  const mg = mailgun({
-    apiKey: MAILGUN_APIKEY,
-    domain: MAILGUN_DOMAIN,
-  });
-  const data = {
-    from: `<${EMAIL_ADDRESS}>`,
-    to: `${email}`,
-    subject,
-    html: message,
-  };
-  await mg.messages().send(data);
+const { SENDGRID_API_KEY } = require('../src/core/config');
+
+sendGridMail.setApiKey(SENDGRID_API_KEY);
+
+// eslint-disable-next-line consistent-return
+const sendMail = async (email, subject, message) => {
+  try {
+    const data = {
+      to: `${email}`,
+      from: 'E-care <ebukanathan@gmail.com>',
+      subject,
+      html: message,
+    };
+    await sendGridMail.send(data);
+  } catch (err) {
+    logger.log({
+      level: 'error',
+      message: err.message,
+    });
+    return { err };
+  }
 };
 
 module.exports = sendMail;
