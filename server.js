@@ -11,6 +11,8 @@ InitiateMongoServer();
 const baseRouter = require('./src/router');
 const doctorRouter = require('./src/router/doctor.router');
 const patientRouter = require('./src/router/patient.router');
+const giveadvRouter = require('./src/router/giveadvRouter');
+const advRouter = require('./src/router/advRouter');
 
 // App Init
 const app = express();
@@ -25,5 +27,7 @@ app.use(morgan('tiny'));
 app.use('/', baseRouter);
 app.use('/api/v1/doctor', doctorRouter);
 app.use('/api/v1/patient', patientRouter);
+app.use(giveadvRouter);
+app.use(advRouter)
 
 module.exports = app;
