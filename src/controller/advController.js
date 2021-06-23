@@ -24,3 +24,14 @@ exports.advReq = (req,res)=>{
 
 };
 
+exports.viewAdvreq = (req,res)=>{
+    Advicereq.findById(req.params.id,(err,data)=>{
+        if(err){
+            return res.status(500).json({ err })
+        }else{
+            return res.status(200).json({ data })
+        }
+    })
+};
+
+

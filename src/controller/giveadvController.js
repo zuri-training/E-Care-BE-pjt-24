@@ -1,26 +1,27 @@
-const Advicereq = require('../models/advreq');
+const Giveadv = require('../models/givedv');
 
-exports.advReq = (req,res)=>{
-    
-    Advicereq.create({
-        username:req.body.username,
-        illness:req.body.illness,
-        doctor:req.body.doctor,
-        date:req.body.date
-
+exports.docAdv = (req,res) => {
+    Giveadv.create({
+        prescription:req.body.prescription,
+        dosage:req.body.dosage,
+        advice:req.body.advice,
+        patient:req.body.patient
     },(err,advice)=>{
-        console.log(advice)
-        if(err){
-            return res.status(500).json({ err })
+        if (err){
+            return res.status(500).json({err})
+        }else{
+            return res.status(200).json({advice})
         }
-        advice.save((err,savedAdvice)=>{
-            if(err){
-                return res.status(500).json({ err})
-            }else{
-                return res.status(200).json({message:"advice request saved",savedAdvice})
-            }
-        })
     })
-
 };
 
+
+exports.advView = (req,res)=>{
+    Giveadv.findById(req.params.id,(err,data)=>{
+        if(err){
+            return res.status(500).json({ err })
+        }else{
+            return res.status(200).json({ data })
+        }
+    })
+};

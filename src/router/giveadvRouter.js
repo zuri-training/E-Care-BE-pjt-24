@@ -4,7 +4,7 @@ const Giveadv = require('../models/givedv');
 const giveadvCtrl = require('../controller/giveadvController')
 
 
-router.post('/giveadvice',giveadvCtrl.docAdv)
+router.post('/doctor/giveadvice',giveadvCtrl.docAdv)
 router.get('/viewadvice/:id',giveadvCtrl.advView)
 
 module.exports = router
