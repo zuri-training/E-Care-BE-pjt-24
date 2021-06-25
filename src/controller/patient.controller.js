@@ -5,7 +5,7 @@ const { throwError } = require('../../utils/handleErrors');
 const { hashManager } = require('../../utils/bcrypt');
 const { jwtManager } = require('../../utils/tokenizer');
 const sendMail = require('../../utils/email');
-const { activateAccount, activatePatient } = require('../../utils/messages');
+const { activateAccount } = require('../../utils/messages');
 const { uploadFile } = require('../../utils/uploader');
 const Patient = require('../models/patient');
 
@@ -41,7 +41,7 @@ exports.signup = async (req, res) => {
       const newPatient = await Patient.create({ ...req.body, token });
 
       if (newPatient) {
-        const activationLink = activateAccount(token, newPatient._id);
+        const activationLink = activateAccount(token);
         await sendMail(email, 'account activation', activationLink);
         return sendSuccess(res, { patientId: newPatient._id }, 'success');
       }
@@ -54,14 +54,13 @@ exports.signup = async (req, res) => {
 
 exports.activateAccount = async (req, res) => {
   try {
-    const { patientId, token } = req.params;
+    const { token } = req.params;
 
-    if (!patientId || !token) {
+    if (!token) {
       throwError('Broken Link', 401);
     }
 
     const updatedPatient = await Patient.findOneAndUpdate({
-      _id: patientId,
       token,
       isVerified: false,
     }, { isVerified: true }, {
@@ -107,7 +106,7 @@ exports.signin = async (req, res) => {
           { token },
           { new: true });
         if (updatedPatient) {
-          const activationLink = activateAccount(token, updatedPatient._id);
+          const activationLink = activatePatient(token, updatedPatient._id);
           await sendMail(updatedPatient.email, 'account activation', activationLink);
           throwError('Account not activated, check your email to activate', 401);
         }
@@ -143,7 +142,7 @@ exports.resendToken = async (req, res) => {
     if (!updatedPatient) {
       throwError('Account has been activated', 401);
     }
-    const activationLink = activatePatient(token, patientId);
+    const activationLink = activate(token);
     await sendMail(updatedPatient.email, 'account activation', activationLink);
 
     return sendSuccess(res, 'Token Sent');

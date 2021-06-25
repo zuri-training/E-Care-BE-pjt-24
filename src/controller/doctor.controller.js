@@ -47,7 +47,7 @@ exports.signup = async (req, res) => {
       const newDoctor = await Doctor.create({ ...req.body, token });
 
       if (newDoctor) {
-        const activationLink = activateAccount(token, newDoctor._id);
+        const activationLink = activateAccount(token);
         await sendMail(email, 'account activation', activationLink);
         return sendSuccess(res, { message: 'Success', doctorId: newDoctor._id });
       }
@@ -62,12 +62,11 @@ exports.activateAccount = async (req, res) => {
   try {
     const { doctorId, token } = req.params;
 
-    if (!doctorId || !token) {
+    if (!token) {
       throwError('Broken Link', 401);
     }
 
     const updatedDoctor = await Doctor.findOneAndUpdate({
-      _id: doctorId,
       token,
       isVerified: false,
     }, { isVerified: true }, {
@@ -113,7 +112,7 @@ exports.signin = async (req, res) => {
           { token },
           { new: true });
         if (updatedDoctor) {
-          const activationLink = activateAccount(token, updatedDoctor._id);
+          const activationLink = activateAccount(token);
           await sendMail(updatedDoctor.email, 'account activation', activationLink);
           throwError('Account not activated, check your email to activate', 401);
         }

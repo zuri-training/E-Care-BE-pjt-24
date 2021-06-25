@@ -4,7 +4,7 @@ const { authenticate } = require('../core/auth');
 const { upload } = require('../../utils/uploader');
 
 patientRoute.post('/create', upload, patientController.signup);
-patientRoute.get('/activate-patient-account/:patientId/:token', patientController.activateAccount);
+patientRoute.get('/activate-patient-account/:token', patientController.activateAccount);
 patientRoute.get('/resend-token/:patientId', patientController.resendToken);
 patientRoute.post('/login', patientController.signin);
 patientRoute.get('/all-patients/get', authenticate, patientController.getAllPatients);

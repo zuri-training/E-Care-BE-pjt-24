@@ -28,6 +28,6 @@ app.use('/', baseRouter);
 app.use('/api/v1/doctor', doctorRouter);
 app.use('/api/v1/patient', patientRouter);
 app.use(giveadvRouter);
-app.use(advRouter)
+app.use(advRouter);
 
 module.exports = app;

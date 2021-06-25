@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const Giveadv = require('../models/givedv');
 const giveadvCtrl = require('../controller/giveadvController')
 
 
