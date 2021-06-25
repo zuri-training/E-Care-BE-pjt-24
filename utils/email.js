@@ -10,7 +10,7 @@ const sendMail = async (email, subject, message) => {
   try {
     const data = {
       to: `${email}`,
-      from: 'E-care <ebukanathan@gmail.com>',
+      from: 'E-care <herokuaaps@gmail.com>',
       subject,
       html: message,
     };

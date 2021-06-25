@@ -33,5 +33,3 @@ exports.viewAdvreq = (req,res)=>{
         }
     })
 };
-
-

@@ -1,4 +1,4 @@
-const Giveadv = require('../models/givedv');
+const Giveadv = require('../models/giveadv');
 
 exports.docAdv = (req,res) => {
     Giveadv.create({
