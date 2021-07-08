@@ -63,7 +63,7 @@ exports.activateAccount = async (req, res) => {
     const updatedPatient = await Patient.findOneAndUpdate({
       token,
       isVerified: false,
-    }, { isVerified: true }, {
+    }, { isVerified: true, token: '' }, {
       new: true,
     });
 
@@ -79,6 +79,8 @@ exports.activateAccount = async (req, res) => {
       });
       return sendSuccess(res, { token: jwttoken });
     }
+
+    return { error: 'Invalid token' };
   } catch (err) {
     return sendError(res, err);
   }
@@ -106,7 +108,7 @@ exports.signin = async (req, res) => {
           { token },
           { new: true });
         if (updatedPatient) {
-          const activationLink = activatePatient(token, updatedPatient._id);
+          const activationLink = activateAccount(token);
           await sendMail(updatedPatient.email, 'account activation', activationLink);
           throwError('Account not activated, check your email to activate', 401);
         }
@@ -142,7 +144,7 @@ exports.resendToken = async (req, res) => {
     if (!updatedPatient) {
       throwError('Account has been activated', 401);
     }
-    const activationLink = activate(token);
+    const activationLink = activateAccount(token);
     await sendMail(updatedPatient.email, 'account activation', activationLink);
 
     return sendSuccess(res, 'Token Sent');
@@ -223,7 +225,7 @@ exports.resetPassword = async (req, res) => {
 
 exports.getPatient = async (req, res) => {
   try {
-    const { patientId } = req.params;
+    const { patientId } = req.auth;
     if (!patientId) {
       throwError('patientId is required', 401);
     }

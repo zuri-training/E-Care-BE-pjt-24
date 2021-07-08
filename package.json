@@ -20,20 +20,21 @@
   },
   "homepage": "https://github.com/zuri-training/E-Care-BE-pjt-24#readme",
   "dependencies": {
+    "@sendgrid/mail": "^7.4.4",
     "bcrypt": "^5.0.1",
+    "bluebird": "^3.7.2",
     "cloudinary": "^1.26.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mailgun-js": "^0.22.0",
-    "mongoose": "^5.12.14",
+    "mongoose": "^5.13.2",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "nodemailer": "^6.6.1",
     "winston": "^3.3.3",
-    "winston-daily-rotate-file": "^4.5.5",
-    "@sendgrid/mail": "^7.4.4"
+    "winston-daily-rotate-file": "^4.5.5"
   },
   "devDependencies": {
     "eslint": "^7.26.0",
