@@ -13,5 +13,5 @@ patientRoute.get('/patient-forgot-password/:email', patientController.forgotPass
 patientRoute.post('/patient-reset-password', patientController.resetPassword);
 patientRoute.put('/update-patient', authenticate, upload, patientController.updatePatient);
 patientRoute.delete('/delete-patient', authenticate, patientController.deletePatient);
-
+//gkhfvkyhjgbyugbyuhjbkhu 
 module.exports = patientRoute;
