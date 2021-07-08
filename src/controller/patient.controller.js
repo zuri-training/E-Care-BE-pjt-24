@@ -63,7 +63,7 @@ exports.activateAccount = async (req, res) => {
     const updatedPatient = await Patient.findOneAndUpdate({
       token,
       isVerified: false,
-    }, { isVerified: true }, {
+    }, { isVerified: true, token: '' }, {
       new: true,
     });
 
@@ -79,6 +79,8 @@ exports.activateAccount = async (req, res) => {
       });
       return sendSuccess(res, { token: jwttoken });
     }
+
+    return { error: 'Invalid token' };
   } catch (err) {
     return sendError(res, err);
   }
